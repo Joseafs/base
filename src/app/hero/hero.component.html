@@ -1,0 +1,81 @@
+<header >
+    <div class="container">
+        <div id='hd-title' class="w-100 a-between c-first">
+            <div class="fs-3 line-b"><span class="fw-xl">BUSCA KITSU</span> - TESTE FRONT-END</div>
+            <span class="fs-3 d-middle sm-d-off name">José André Fernandes Sabino</span>
+        </div>
+        <div class="row align-item-end">
+            <div class="col-md-6">
+                <form id="i-search" novalidate  (submit)='submitOff($event)'>
+                    <label class="flt-l pdg-b-5 c-first" for="ipt-search">Nome do Personagem</label>
+                    <input id='ipt-search' type="search" (keyup)="search($event)">
+                </form>
+            </div>
+            <div class="col-md-6 align-self-end pdg-b-20">
+            <div class="text-right w-50 flt-r">
+                <!-- Search: {{ pgtSearch }} | -->
+                <div class="input-group input-group-sm mb-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Search</span>
+                    </div>
+                    <input class="form-control" disabled type="text" value="{{pgtSearch}}">
+                </div>
+                <div class="input-group input-group-sm mb-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Qtd. Pg</span>
+                    </div>
+                    <input class="form-control" disabled type="number" value="{{pgtCountPg}}">
+                </div>
+                <div class="input-group input-group-sm mb-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Página</span>
+                    </div>
+                    <input class="form-control" disabled type="number" value="{{pgtPage}}">
+                </div>
+                <div class="input-group input-group-sm">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-sm">Itens por pagina</span>
+                    </div>
+                    <input class="form-control" type="number" value="{{pgtLimit}}" (keyup)='onLimit($event)'>
+                </div>
+            </div>
+            <div class="text-right w-100 d-off">
+                <div class="btn-group">
+                <button type='button' class="btn btn-outline-info mgn-5" [routerLink]="['/home']" routerLinkActive="active" >Home</button>
+                </div>
+                <div class="btn-group">
+                <button class="btn btn-outline-info mgn-5" [routerLink]="['/list']" routerLinkActive="active" >Heróis</button>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</header>
+<section>
+    <div *ngIf='list' class="container">
+        <div class='adv-2 mgn-t-10 d-off sm-d-on'>Nome</div>
+        <table class='tb-view'>
+            <thead>
+                <tr>
+                <th width='40%'>Personagem</th>
+                <th width='70%'>Descrição</th>
+                </tr>
+            </thead>
+            <tbody id='tb-list'>
+                <tr class='t-list' *ngFor="let hero of list" height='112px'>
+                <td class='t-title'>
+                    <div class="t-img">
+                    <img [src]=" hero.attributes.image && hero.attributes.image.original ? hero.attributes.image.original: 'assets/img/broken-img.svg'" alt="{{hero.attributes.name}}" width='120'>
+                    </div>
+                    {{hero.attributes.name}}
+                </td>
+                <td class='t-info'>
+                    <span [innerHtml]="hero.attributes.description | slice:0:100 "></span>
+                    <a [routerLink]="[ '/hero', hero.id ]" routerLinkActive="active" class="t-link"></a>
+                </td>
+                </tr>
+            </tbody>
+        </table>
+        <app-pagination [limit]="pgtLimit" page="{{pgtPage}}" max="{{pgtCount}}" (change)='onPageClick($event)'></app-pagination>
+    </div>
+</section>

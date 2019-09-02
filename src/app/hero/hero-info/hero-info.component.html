@@ -1,0 +1,64 @@
+<div class="container pdg-15">
+    <div class="btn-group">
+        <button class="btn btn-outline-info mgn-5" [routerLink]="['/hero']" routerLinkActive="active" >Voltar</button>
+    </div>
+</div>
+<div class="container pdg-15">
+    <div *ngIf="heroInfo.attributes" class="col-xs-12 text-center">
+        <h3>
+            {{heroInfo.attributes.name}}
+        </h3>
+        <br />
+        <div class="t-img">
+            <img class="img-thumbnail rounded" width='200' [src]=" heroInfo.attributes.image && heroInfo.attributes.image.original ? heroInfo.attributes.image.original: 'assets/img/broken-img.svg'" alt="{{heroInfo.attributes.name}}">
+        </div>
+        <br />
+        <div>
+            <span [innerHtml]="heroInfo.attributes.description"></span>
+        </div>
+    </div>
+</div>
+ <hr>
+<div class="container pdg-15">
+    <div *ngIf="heroMediaRelation" class="col-xs-12 text-center">
+        <h2>Participações </h2>
+        <br />
+        <div class="row pdg-b-20" >
+            <div class="col-12 pdg-15" *ngFor="let item of heroMediaRelation">
+                <div class="card text-left">
+                    <h5 class="card-header text-center font-weight-bold" [innerHtml]="item.attributes.canonicalTitle"></h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-auto">
+                                <img width="200px" src="{{item.attributes.posterImage.medium}}" alt="{{item.attributes.canonicalTitle}}" class="img-thumbnail flt-l rounded">
+                            </div>
+                            <div class="col" >
+                                <div *ngIf="item.attributes.synopsis" [innerHtml]="item.attributes.synopsis"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <h4 *ngIf="item.attributes.episodeLength" class="card-footer text-muted">
+                        Nº de Episódios: <span class='badge badge-primary' [innerHtml]="item.attributes.episodeLength"></span>
+                    </h4>
+                    <h4 *ngIf="item.attributes.ratingRank" class="card-footer text-muted">
+                        Ranking: <span class='badge badge-primary' [innerHtml]="item.attributes.ratingRank"></span>
+                    </h4>
+                    <h4 *ngIf="item.attributes.ageRatingGuide" class="card-footer text-muted">
+                        Faixa: <span class='badge badge-primary' [innerHtml]="item.attributes.ageRatingGuide"></span>
+                    </h4>
+                    <h4 *ngIf="item.attributes.status" class="card-footer text-muted">
+                        Status: <span class='badge badge-primary' [innerHtml]="item.attributes.status"></span>
+                    </h4>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div>
+        </div>
+    </div>
+</div>
+<div class="container pdg-15">
+    <div class="btn-group">
+        <button class="btn btn-outline-info mgn-5" [routerLink]="['/hero']" routerLinkActive="active" >Voltar</button>
+    </div>
+</div>

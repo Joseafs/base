@@ -1,0 +1,17 @@
+<div id='pagination' class="d-middle" >
+    <div class='a-center w-100' (window:resize)='resize()'>
+        <div class='nav-btn' [attr.disabled]='page <= 0'>
+            <button id='btn-prev' (click)="clicked('prev')" ><i></i></button>
+        </div>
+        <div id='list-nav'>
+            <div *ngFor="let item of arySize; let i=index" class="nav-btn">
+                <button *ngIf="item >= 0 && item <= pgMax" [class.in]="page == item" (click)="clicked(item)" >
+                    <div>{{ item }}</div>
+                </button>
+            </div>
+        </div>
+        <div *ngIf='page <= pgLimit || page' class='nav-btn'>
+            <button id='btn-next' class='nav-btn' (click)="clicked('next')" ><i></i></button>
+        </div>
+    </div>
+</div>
